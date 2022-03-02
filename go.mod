@@ -3,6 +3,8 @@ module github.com/lucianboboc/learn-go-with-tests
 go 1.17
 
 require (
+	github.com/kisielk/errcheck v1.6.0 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/yuin/goldmark v1.4.1 // indirect
 	golang.org/x/mod v0.5.1 // indirect
 	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f // indirect
