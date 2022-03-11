@@ -2,6 +2,10 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"time"
+
+	"github.com/lucianboboc/learn-go-with-tests/maths"
 )
 
 const english = "English"
@@ -13,6 +17,7 @@ const frenchHelloPrefix = "Bonjour, "
 
 func main() {
 	fmt.Println(Hello("Lucian", "English"))
+	maths.SVGWriter(os.Stdout, time.Now())
 }
 
 func Hello(name, language string) string {
