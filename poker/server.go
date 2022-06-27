@@ -1,4 +1,4 @@
-package main
+package poker
 
 import (
 	"encoding/json"
@@ -7,31 +7,37 @@ import (
 	"strings"
 )
 
+// PlayerStore stores score information about players.
 type PlayerStore interface {
 	GetPlayerScore(name string) int
 	RecordWin(name string)
 	GetLeague() League
 }
 
+// Player stores a name with a number of wins.
 type Player struct {
 	Name string
 	Wins int
 }
 
+// PlayerServer is a HTTP interface for player information.
 type PlayerServer struct {
-	Store PlayerStore
+	store PlayerStore
 	http.Handler
 }
 
 const jsonContentType = "application/json"
 
+// NewPlayerServer creates a PlayerServer with routing configured.
 func NewPlayerServer(store PlayerStore) *PlayerServer {
 	p := new(PlayerServer)
-	p.Store = store
+
+	p.store = store
 
 	router := http.NewServeMux()
-	router.Handle("/league", http.HandlerFunc(p.leagueHandler))
+	router.Handle("/League", http.HandlerFunc(p.leagueHandler))
 	router.Handle("/players/", http.HandlerFunc(p.playersHandler))
+
 	p.Handler = router
 
 	return p
@@ -39,20 +45,23 @@ func NewPlayerServer(store PlayerStore) *PlayerServer {
 
 func (p *PlayerServer) leagueHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("content-type", jsonContentType)
-	json.NewEncoder(w).Encode(p.Store.GetLeague())
+	json.NewEncoder(w).Encode(p.store.GetLeague())
 }
 
 func (p *PlayerServer) playersHandler(w http.ResponseWriter, r *http.Request) {
 	player := strings.TrimPrefix(r.URL.Path, "/players/")
-	if r.Method == http.MethodPost {
+
+	switch r.Method {
+	case http.MethodPost:
 		p.processWin(w, player)
-	} else {
+	case http.MethodGet:
 		p.showScore(w, player)
 	}
 }
 
 func (p *PlayerServer) showScore(w http.ResponseWriter, player string) {
-	score := p.Store.GetPlayerScore(player)
+	score := p.store.GetPlayerScore(player)
+
 	if score == 0 {
 		w.WriteHeader(http.StatusNotFound)
 	}
@@ -61,6 +70,6 @@ func (p *PlayerServer) showScore(w http.ResponseWriter, player string) {
 }
 
 func (p *PlayerServer) processWin(w http.ResponseWriter, player string) {
-	p.Store.RecordWin(player)
+	p.store.RecordWin(player)
 	w.WriteHeader(http.StatusAccepted)
 }
