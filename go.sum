@@ -2,6 +2,7 @@ github.com/approvals/go-approval-tests v0.0.0-20211008131110-0c40b30e0000/go.mod
 github.com/approvals/go-approval-tests v0.0.0-20220530063708-32d5677069bd h1:8j7sBEy0h6+Bvr0AeKHIHCsmzCzWGXAQweA7k+uiRYk=
 github.com/approvals/go-approval-tests v0.0.0-20220530063708-32d5677069bd/go.mod h1:PJOqSY8IofNv3heAD6k8E7EfFS6okiSS9bSAasaAUME=
 github.com/gomarkdown/markdown v0.0.0-20211212230626-5af6ad2f47df/go.mod h1:JDGcbDT52eL4fju3sZ4TeHGsQwhG9nbDV21aMyhwPoA=
+github.com/gorilla/websocket v1.5.0 h1:PPwGk2jz7EePpoHN/+ClbZu8SPxiqlu12wZP/3sWmnc=
 github.com/gorilla/websocket v1.5.0/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/quii/learn-go-with-tests v0.0.0-20220616155735-ce3b9c7232e5 h1:ro0loEuJGXM0SKvXRw5LvEE+amm4KvVhPso5hJOk0xM=
 github.com/quii/learn-go-with-tests v0.0.0-20220616155735-ce3b9c7232e5/go.mod h1:Tj+8i1g8Zi5oxB6zsv8By2Xvr7LMr4zgmh89zQmD+8U=
